@@ -118,7 +118,7 @@ groundedness grading) relies on the model's tool-calling ability.
 Ollama models don't and will throw parsing errors — if you hit that,
 switch `CHAT_MODEL` in `.env` to `qwen2.5` (`ollama pull qwen2.5` first).
 
-## Design decisions worth mentioning in an interview
+## Design decisions
 
 - **Deterministic routing over free-form tool-calling.** The router
   classifies query type once, then nodes are called directly rather
@@ -140,26 +140,11 @@ switch `CHAT_MODEL` in `.env` to `qwen2.5` (`ollama pull qwen2.5` first).
   that flag actually permits (LLM-generated Cypher can in principle
   write/delete) rather than turning it on blindly.
 
-## Honest scope notes (say this in interviews, don't skip it)
+## Honest scope notes
 
 This is a working, well-structured **portfolio project**, not a
-battle-tested production system. It's fair to describe as such and to
-walk through the design decisions above. It does *not* currently have:
+battle-tested production system. It does *not* currently have:
 observability/tracing (would add LangSmith), auth on the API,
 rate limiting, batch/async ingestion for large corpora, evaluation
 metrics on the retrieval/routing quality (would add a small labeled
-eval set + RAGAS), or load testing. Naming these gaps unprompted in an
-interview reads as engineering maturity, not weakness — claiming
-"production-grade" without them, and then not being able to answer a
-follow-up about uptime or scale, reads worse.
-
-## Suggested resume bullets
-
-- Built an agentic RAG system combining vector search and a Neo4j
-  knowledge graph, using LangGraph to route queries between semantic
-  and relational retrieval strategies based on query classification.
-- Designed a self-correcting agent loop with automated groundedness
-  checking, reducing unsupported answers via a bounded retry mechanism.
-- Implemented an idempotent LLM-based knowledge graph extraction
-  pipeline (structured output + Cypher MERGE) to build a queryable
-  graph of paper/author/method/citation relationships from unstructured PDFs.
+eval set + RAGAS), or load testing.
